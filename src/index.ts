@@ -131,29 +131,62 @@ while (!exit) {
       break;
     case 2:
       console.log(`\n📖 These are all the attractions of ${oopsPark.name}:`);
-      const attractionIndex = readlineSync.keyInSelect(
+      const statusAttractionIndex = readlineSync.keyInSelect(
         oopsPark.showAllAttractionsNames(),
         "Select an attraction: ",
         keyInSelectOptions
       );
 
-      const selectedAttraction = oopsPark.attractions[attractionIndex];
+      const statusSelectedAttraction =
+        oopsPark.attractions[statusAttractionIndex];
 
-      console.log(selectedAttraction.showAttractionStatus());
-      
+      console.log(statusSelectedAttraction.showAttractionStatus());
+
       readlineSync.question("Press ENTER to continue...");
       break;
     case 3:
-      console.log("\nAdd people to an attraction under development");
-      readlineSync.question("Press ENTER to continue...");
+      console.log(`\n📖 These are all the attractions of ${oopsPark.name}:`);
+      const enterPeopleAttractionIndex = readlineSync.keyInSelect(
+        oopsPark.showAllAttractionsNames(),
+        "Select an attraction: ",
+        keyInSelectOptions
+      );
+
+      const enterPeopleSelectedAttraction =
+        oopsPark.attractions[enterPeopleAttractionIndex];
+
+      let continueEnteringPeople: boolean = true;
+
+      while (continueEnteringPeople) {
+        if (enterPeopleSelectedAttraction.state === "inactive") {
+          continueEnteringPeople = false;
+          console.log(
+            `\n❌ ${enterPeopleSelectedAttraction.name} is currently inactive.`
+          );
+          readlineSync.question(`\nPress ENTER to continue...`);
+        } else {
+          const peopleHeight = readlineSync.questionFloat(
+            "\nWhat's the min height of the person who want to enter? "
+          );
+
+          const res = enterPeopleSelectedAttraction.enterPeople(peopleHeight);
+
+          console.log(res);
+
+          continueEnteringPeople = readlineSync.keyInYN(
+            `\nDo you want to enter another person to ${enterPeopleSelectedAttraction.name}? `
+          ) as boolean;
+        }
+      }
+
       break;
     case 4:
       console.log("\nActivate/Deactivate an attraction under development");
-      readlineSync.question("Press ENTER to continue...");
+      readlineSync.question("\nPress ENTER to continue...");
       break;
     case 5:
       console.log("\nCalculate total operatin cost under development");
-      readlineSync.question("Press ENTER to continue...");
+      readlineSync.question("\nPress ENTER to continue...");
       break;
     case 6:
       console.log("\n👋 Bye");

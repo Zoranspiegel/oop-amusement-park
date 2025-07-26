@@ -3,48 +3,54 @@ export default abstract class Attraction {
   protected baseEntryPrice: number;
   protected maxPeopleCapacity: number;
   protected currentPeopleQuantity: number;
-  protected state: "active" | "inactive";
+  protected _state: "active" | "inactive";
 
   constructor(name: string, baseEntryPrice: number, maxPeopleCapacity: number) {
     this._name = name;
     this.baseEntryPrice = baseEntryPrice;
     this.maxPeopleCapacity = maxPeopleCapacity;
     this.currentPeopleQuantity = 0;
-    this.state = "inactive";
+    this._state = "inactive";
   }
 
   get name() {
     return this._name;
   }
 
+  get state() {
+    return this._state;
+  }
+
   abstract calculateOperationCost(): string;
 
   public activate(): string {
-    if (this.state === "active") {
+    if (this._state === "active") {
       return `❌ ${this.name} is already active`;
     } else {
-      this.state = "active";
+      this._state = "active";
       return `🟢 ${this.name} is now active`;
     }
   }
 
   public deactivate(): string {
-    if (this.state === "inactive") {
+    if (this._state === "inactive") {
       return `❌ ${this.name} is already inactive`;
     } else {
-      this.state = "inactive";
+      this._state = "inactive";
       return `🔴 ${this.name} is now inactive`;
     }
   }
 
-  protected enterPeople(quantity: number, height?: number): string {
-    if (this.currentPeopleQuantity + quantity > this.maxPeopleCapacity) {
+  public enterPeople(_height: number): string {
+    if (this._state === "inactive") {
+      return `❌ ${this._name} is currently inactive`;
+    } else if (this.currentPeopleQuantity + 1 > this.maxPeopleCapacity) {
       return `❌ ${this.name}'s people limit reached. Only ${
         this.maxPeopleCapacity - this.currentPeopleQuantity
       } person(s) can enter`;
     } else {
       this.currentPeopleQuantity += 1;
-      return `🚶${quantity} person(s) entered to ${this.name}`;
+      return `\n🚶 1 person entered to ${this.name}`;
     }
   }
 
@@ -55,8 +61,8 @@ export default abstract class Attraction {
       - 🧑‍🤝‍🧑 Maximum people capacity: ${this.maxPeopleCapacity}
       - 👨‍👧‍👦 Current people quantity: ${this.currentPeopleQuantity}
       - 💵 Base entry price: $${this.baseEntryPrice.toFixed(2)}
-      - ${this.state === "active" ? "🟢" : "🔴"} The attraction is currently ${
-      this.state
+      - ${this._state === "active" ? "🟢" : "🔴"} The attraction is currently ${
+      this._state
     }
     `;
   }

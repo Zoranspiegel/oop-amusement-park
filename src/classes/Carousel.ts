@@ -13,12 +13,12 @@ export default class Carousel extends Attraction {
   }
 
   public activate(): string {
-    if (this.state === "active") {
+    if (this._state === "active") {
       return `❌ ${this.name} is already active`;
     } else if (this.inMaintenance) {
       return `🛠️ ${this.name} is in maintenance`;
     } else {
-      this.state = "active";
+      this._state = "active";
       return `🟢 ${this.name} is now active`;
     }
   }
