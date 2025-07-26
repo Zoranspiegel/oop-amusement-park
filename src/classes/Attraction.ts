@@ -4,11 +4,18 @@ export default abstract class Attraction {
   protected maxPeopleCapacity: number;
   protected currentPeopleQuantity: number;
   protected state: "active" | "inactive";
+  protected operativeCostPerHour: number;
 
-  constructor(name: string, baseEntryPrice: number, maxPeopleCapacity: number) {
+  constructor(
+    name: string,
+    baseEntryPrice: number,
+    maxPeopleCapacity: number,
+    operativeCostPerHour: number
+  ) {
     this.name = name;
     this.baseEntryPrice = baseEntryPrice;
     this.maxPeopleCapacity = maxPeopleCapacity;
+    this.operativeCostPerHour = operativeCostPerHour;
     this.currentPeopleQuantity = 0;
     this.state = "inactive";
   }
