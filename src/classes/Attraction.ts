@@ -1,23 +1,20 @@
 export default abstract class Attraction {
-  protected name: string;
+  protected _name: string;
   protected baseEntryPrice: number;
   protected maxPeopleCapacity: number;
   protected currentPeopleQuantity: number;
   protected state: "active" | "inactive";
-  protected operativeCostPerHour: number;
 
-  constructor(
-    name: string,
-    baseEntryPrice: number,
-    maxPeopleCapacity: number,
-    operativeCostPerHour: number
-  ) {
-    this.name = name;
+  constructor(name: string, baseEntryPrice: number, maxPeopleCapacity: number) {
+    this._name = name;
     this.baseEntryPrice = baseEntryPrice;
     this.maxPeopleCapacity = maxPeopleCapacity;
-    this.operativeCostPerHour = operativeCostPerHour;
     this.currentPeopleQuantity = 0;
     this.state = "inactive";
+  }
+
+  get name() {
+    return this._name;
   }
 
   abstract calculateOperationCost(): string;
@@ -40,7 +37,7 @@ export default abstract class Attraction {
     }
   }
 
-  protected enterPeople(quantity: number): string {
+  protected enterPeople(quantity: number, height?: number): string {
     if (this.currentPeopleQuantity + quantity > this.maxPeopleCapacity) {
       return `❌ ${this.name}'s people limit reached. Only ${
         this.maxPeopleCapacity - this.currentPeopleQuantity
@@ -58,7 +55,9 @@ export default abstract class Attraction {
       - 🧑‍🤝‍🧑 Maximum people capacity: ${this.maxPeopleCapacity}
       - 👨‍👧‍👦 Current people quantity: ${this.currentPeopleQuantity}
       - 💵 Base entry price: $${this.baseEntryPrice.toFixed(2)}
-      - ${this.state === "active" ? "🟢" : "🔴"} The attraction is currently ${this.state}
+      - ${this.state === "active" ? "🟢" : "🔴"} The attraction is currently ${
+      this.state
+    }
     `;
   }
 }
