@@ -1,5 +1,6 @@
 import readlineSync from "readline-sync";
 import oopsPark from "./objects/oopsPark";
+import RollerCoaster from "./classes/RollerCoaster";
 
 const keyInSelectOptions = {
   guide: false,
@@ -52,16 +53,79 @@ while (!exit) {
             `\nWhat is the maximum people capacity of ${rollerCoasterName}? `
           );
 
-          const rollerCoasterOperativeCostPerHour = readlineSync.questionFloat(
-            `\nWhat will be the operative cost per hour of ${rollerCoasterName}? `
+          const newRollerCoster = new RollerCoaster(
+            rollerCoasterName,
+            rollerCoasterEntryPrice,
+            rollerCoasterMaxPeopleCapacity
           );
 
-          console.log(rollerCoasterName, rollerCoasterEntryPrice, rollerCoasterMaxPeopleCapacity, rollerCoasterOperativeCostPerHour);
-          readlineSync.question("Press ENTER to continue...");
+          oopsPark.addAttraction(newRollerCoster);
+
+          console.log(
+            `\n🎢 ${rollerCoasterName} is your new Roller Coaster. Congratulations!`
+          );
+
+          console.log(newRollerCoster.showAttractionStatus());
+
+          readlineSync.question("\nPress ENTER to continue...");
           break;
         case 2:
+          const hauntedHouseName = readlineSync.question(
+            "\nWhat will be the name of this Haunted House? "
+          );
+
+          const hauntedHouseEntryPrice = readlineSync.questionFloat(
+            `\nWhat will be the entry price for ${hauntedHouseName}? `
+          );
+
+          const hauntedHouseMaxPeopleCapacity = readlineSync.questionInt(
+            `\nWhat is the maximum people capacity of ${hauntedHouseName}? `
+          );
+
+          const newHauntedHouse = new RollerCoaster(
+            hauntedHouseName,
+            hauntedHouseEntryPrice,
+            hauntedHouseMaxPeopleCapacity
+          );
+
+          oopsPark.addAttraction(newHauntedHouse);
+
+          console.log(
+            `\n🧟🏨🧟 ${hauntedHouseName} is your new Haunted House. Congratulations!`
+          );
+
+          console.log(newHauntedHouse.showAttractionStatus());
+
+          readlineSync.question("\nPress ENTER to continue...");
           break;
         case 3:
+          const carouselName = readlineSync.question(
+            "\nWhat will be the name of this Carousel? "
+          );
+
+          const carouselEntryPrice = readlineSync.questionFloat(
+            `\nWhat will be the entry price for ${carouselName}? `
+          );
+
+          const carouselMaxPeopleCapacity = readlineSync.questionInt(
+            `\nWhat is the maximum people capacity of ${carouselName}? `
+          );
+
+          const newCarousel = new RollerCoaster(
+            carouselName,
+            carouselEntryPrice,
+            carouselMaxPeopleCapacity
+          );
+
+          oopsPark.addAttraction(newCarousel);
+
+          console.log(
+            `\n🎠 ${carouselName} is your new Carousel. Congratulations!`
+          );
+
+          console.log(newCarousel.showAttractionStatus());
+
+          readlineSync.question("\nPress ENTER to continue...");
           break;
       }
       break;
