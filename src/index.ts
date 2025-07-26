@@ -23,7 +23,7 @@ let exit = false;
 while (!exit) {
   console.clear();
 
-  console.log("\n🏰 Welcome to Oops-Park");
+  console.log(`\n🏰 Welcome to ${oopsPark.name}`);
 
   const index = readlineSync.keyInSelect(
     menu,
@@ -130,7 +130,17 @@ while (!exit) {
       }
       break;
     case 2:
-      console.log("\nView the status of all attractions under development");
+      console.log(`\n📖 These are all the attractions of ${oopsPark.name}:`);
+      const attractionIndex = readlineSync.keyInSelect(
+        oopsPark.showAllAttractionsNames(),
+        "Select an attraction: ",
+        keyInSelectOptions
+      );
+
+      const selectedAttraction = oopsPark.attractions[attractionIndex];
+
+      console.log(selectedAttraction.showAttractionStatus());
+      
       readlineSync.question("Press ENTER to continue...");
       break;
     case 3:
