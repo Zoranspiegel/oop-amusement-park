@@ -1,6 +1,8 @@
 import readlineSync from "readline-sync";
 import oopsPark from "./objects/oopsPark";
 import RollerCoaster from "./classes/RollerCoaster";
+import HauntedHouse from "./classes/HauntedHouse";
+import Carousel from "./classes/Carousel";
 
 const keyInSelectOptions = {
   guide: false,
@@ -82,7 +84,7 @@ while (!exit) {
             `\nWhat is the maximum people capacity of ${hauntedHouseName}? `
           );
 
-          const newHauntedHouse = new RollerCoaster(
+          const newHauntedHouse = new HauntedHouse(
             hauntedHouseName,
             hauntedHouseEntryPrice,
             hauntedHouseMaxPeopleCapacity
@@ -111,7 +113,7 @@ while (!exit) {
             `\nWhat is the maximum people capacity of ${carouselName}? `
           );
 
-          const newCarousel = new RollerCoaster(
+          const newCarousel = new Carousel(
             carouselName,
             carouselEntryPrice,
             carouselMaxPeopleCapacity
@@ -181,8 +183,31 @@ while (!exit) {
 
       break;
     case 4:
-      console.log("\nActivate/Deactivate an attraction under development");
-      readlineSync.question("\nPress ENTER to continue...");
+      const toggleAttractionIndex = readlineSync.keyInSelect(
+        oopsPark.showAllAttractionsNames(),
+        "Select an attraction: ",
+        keyInSelectOptions
+      );
+
+      const selectedToggleAttraction =
+        oopsPark.attractions[toggleAttractionIndex];
+
+      const selection = readlineSync.keyInSelect(
+        ["Activate", "Deactivate"],
+        "Select an option: ",
+        keyInSelectOptions
+      );
+
+      if (selection === 0) {
+        const res = selectedToggleAttraction.activate();
+        console.log(res);
+        readlineSync.question("\nPress ENTER to continue...");
+      } else {
+        const res = selectedToggleAttraction.deactivate();
+        console.log(res);
+        readlineSync.question("\nPress ENTER to continue...");
+      }
+
       break;
     case 5:
       console.log("\nCalculate total operatin cost under development");
