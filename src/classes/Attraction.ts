@@ -54,7 +54,7 @@ export default abstract class Attraction {
     }
   }
 
-  showAttractionStatus() {
+  public showAttractionStatus() {
     return `
       ${this.name} status:
 

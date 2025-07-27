@@ -45,4 +45,16 @@ export default class Carousel extends Attraction {
     const operativeCost = this.operativeCostPerHour * this.hoursOperative;
     return `\n💲 The operative cost of ${this.name} is ${operativeCost}`;
   }
+
+  public showAttractionStatus() {
+    return `
+      ${this.name} status:
+
+      - 🧑‍🤝‍🧑 Maximum people capacity: ${this.maxPeopleCapacity}
+      - 👨‍👧‍👦 Current people quantity: ${this.currentPeopleQuantity}
+      - 💵 Base entry price: $${this.baseEntryPrice.toFixed(2)}
+      - ${this._state === "active" ? "🟢" : "🔴"} The attraction is currently ${this._state}
+      - 🛠️  Currently ${this.inMaintenance ? "" : "not"} in maintenance
+    `;
+  }
 }

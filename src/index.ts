@@ -132,19 +132,28 @@ while (!exit) {
       }
       break;
     case 2:
-      console.log(`\n📖 These are all the attractions of ${oopsPark.name}:`);
-      const statusAttractionIndex = readlineSync.keyInSelect(
-        oopsPark.showAllAttractionsNames(),
-        "Select an attraction: ",
-        keyInSelectOptions
-      );
+      const allAttractionsNames = oopsPark.showAllAttractionsNames();
 
-      const statusSelectedAttraction =
-        oopsPark.attractions[statusAttractionIndex];
+      if (!allAttractionsNames.length) {
+        console.log(
+          `\n🌑 ${oopsPark.name} currently has not any attraction...`
+        );
+        readlineSync.question("\nPress ENTER to continue...");
+      } else {
+        console.log(`\n📖 These are all the attractions of ${oopsPark.name}:`);
+        const statusAttractionIndex = readlineSync.keyInSelect(
+          allAttractionsNames,
+          "Select an attraction: ",
+          keyInSelectOptions
+        );
 
-      console.log(statusSelectedAttraction.showAttractionStatus());
+        const statusSelectedAttraction =
+          oopsPark.attractions[statusAttractionIndex];
 
-      readlineSync.question("Press ENTER to continue...");
+        console.log(statusSelectedAttraction.showAttractionStatus());
+
+        readlineSync.question("Press ENTER to continue...");
+      }
       break;
     case 3:
       console.log(`\n📖 These are all the attractions of ${oopsPark.name}:`);
