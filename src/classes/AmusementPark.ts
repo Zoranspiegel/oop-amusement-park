@@ -26,6 +26,6 @@ export default class AmusementPark {
 
   addAttraction(newAttraction: AttractionT): string {
     this._attractions.push(newAttraction);
-    return `${newAttraction.name} successfully added to ${this.name}`;
+    return `\n${newAttraction.name} successfully added to ${this.name}`;
   }
 }

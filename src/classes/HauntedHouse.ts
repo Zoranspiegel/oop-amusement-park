@@ -16,6 +16,6 @@ export default class HauntedHouse extends Attraction {
 
   public calculateOperationCost(): string {
     const operativeCost = this.operativeCostPerHour * this.hoursOperative;
-    return `💲 The operative cost of ${this.name} is ${operativeCost}`;
+    return `\n💲 The operative cost of ${this.name} is ${operativeCost}`;
   }
 }

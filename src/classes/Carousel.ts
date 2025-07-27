@@ -14,35 +14,35 @@ export default class Carousel extends Attraction {
 
   public activate(): string {
     if (this._state === "active") {
-      return `❌ ${this.name} is already active`;
+      return `\n❌ ${this.name} is already active`;
     } else if (this.inMaintenance) {
-      return `🛠️ ${this.name} is in maintenance`;
+      return `\n🛠️ ${this.name} is in maintenance`;
     } else {
       this._state = "active";
-      return `🟢 ${this.name} is now active`;
+      return `\n🟢 ${this.name} is now active`;
     }
   }
 
   public putInMaintenance() {
     if (this.inMaintenance) {
-      return `❌ ${this.name} is already in maintenance`;
+      return `\n❌ ${this.name} is already in maintenance`;
     } else {
       this.inMaintenance = true;
-      return `🛠️ ${this.name} is now in maintenance`;
+      return `\n🛠️ ${this.name} is now in maintenance`;
     }
   }
 
   public endMaintenance() {
     if (!this.inMaintenance) {
-      return `❌ ${this.name} is not in maintenance`;
+      return `\n❌ ${this.name} is not in maintenance`;
     } else {
       this.inMaintenance = false;
-      return `🟢 ${this.name} is not in maintenance anymore`;
+      return `\n🟢 ${this.name} is not in maintenance anymore`;
     }
   }
 
   public calculateOperationCost(): string {
     const operativeCost = this.operativeCostPerHour * this.hoursOperative;
-    return `💲 The operative cost of ${this.name} is ${operativeCost}`;
+    return `\n💲 The operative cost of ${this.name} is ${operativeCost}`;
   }
 }

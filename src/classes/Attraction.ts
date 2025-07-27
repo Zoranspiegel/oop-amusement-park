@@ -25,27 +25,27 @@ export default abstract class Attraction {
 
   public activate(): string {
     if (this._state === "active") {
-      return `❌ ${this.name} is already active`;
+      return `\n❌ ${this.name} is already active`;
     } else {
       this._state = "active";
-      return `🟢 ${this.name} is now active`;
+      return `\n🟢 ${this.name} is now active`;
     }
   }
 
   public deactivate(): string {
     if (this._state === "inactive") {
-      return `❌ ${this.name} is already inactive`;
+      return `\n❌ ${this.name} is already inactive`;
     } else {
       this._state = "inactive";
-      return `🔴 ${this.name} is now inactive`;
+      return `\n🔴 ${this.name} is now inactive`;
     }
   }
 
   public enterPeople(_height: number): string {
     if (this._state === "inactive") {
-      return `❌ ${this._name} is currently inactive`;
+      return `\n❌ ${this._name} is currently inactive`;
     } else if (this.currentPeopleQuantity + 1 > this.maxPeopleCapacity) {
-      return `❌ ${this.name}'s people limit reached. Only ${
+      return `\n❌ ${this.name}'s people limit reached. Only ${
         this.maxPeopleCapacity - this.currentPeopleQuantity
       } person(s) can enter`;
     } else {
